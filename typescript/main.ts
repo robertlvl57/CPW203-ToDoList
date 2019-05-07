@@ -28,6 +28,18 @@ if(testItem.isComplete){
 window.onload = function(){
     let addBtn = <HTMLButtonElement>document.querySelector("div#create-item > button");
     addBtn.onclick = processNewItem;
+
+    let readItemBtn = <HTMLElement>document.querySelector("#read-item > button");
+    readItemBtn.onclick = readItem;
+}
+
+const itemKey:string = "todo";
+
+function readItem(){
+    //get item from storage
+    let item:ToDoItem = JSON.parse(localStorage.getItem(itemKey));
+    alert(item.title);
+    alert(item.description);
 }
 
 function processNewItem(){
@@ -67,7 +79,7 @@ function saveItem(item:ToDoItem):void{
 
     //ensure user can use localStorage
     if(typeof(Storage) != "undefined"){
-        localStorage.setItem("todo", item.title);
+        localStorage.setItem(itemKey, data);
     }
 }
 

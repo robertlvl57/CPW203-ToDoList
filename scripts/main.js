@@ -6,7 +6,15 @@ var ToDoItem = (function () {
 window.onload = function () {
     var addBtn = document.querySelector("div#create-item > button");
     addBtn.onclick = processNewItem;
+    var readItemBtn = document.querySelector("#read-item > button");
+    readItemBtn.onclick = readItem;
 };
+var itemKey = "todo";
+function readItem() {
+    var item = JSON.parse(localStorage.getItem(itemKey));
+    alert(item.title);
+    alert(item.description);
+}
 function processNewItem() {
     var item = getItemFromForm();
     saveItem(item);
@@ -31,7 +39,7 @@ function saveItem(item) {
     console.log("Converting todoitem into JSON string...");
     console.log(data);
     if (typeof (Storage) != "undefined") {
-        localStorage.setItem("todo", item.title);
+        localStorage.setItem(itemKey, data);
     }
 }
 function getItemFromForm() {
