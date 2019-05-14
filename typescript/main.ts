@@ -47,6 +47,25 @@ function processNewItem(){
     saveItem(item);
     notifyUser();
     clearForm();
+    displayToDo(item);
+}
+
+function displayToDo(item:ToDoItem){
+    let todoList = document.getElementById("todo-list");
+    let itemPar = document.createElement("p");
+    itemPar.innerText = item.title;
+    itemPar.setAttribute("data-description", item.description);
+    itemPar.onclick = toggleItemComplete;
+
+    todoList.appendChild(itemPar);
+}
+
+function toggleItemComplete(){
+    let currItem:HTMLElement = this;
+    currItem.classList.toggle("completed");
+    let title = currItem.innerText;
+    let desc = currItem.getAttribute("data-description");
+    alert("You completed " + title + ":" +desc);
 }
 
 function clearForm(){
